@@ -5,9 +5,10 @@ const cors = require("cors");
 app.use(express.json());
 app.use(cors());
 
-require("./db/connection");
+const connectDB = require("./db/connection");
 const Users = require("./modal/loginUserModal");
-// const userRoutes = require("../server/routes/loginUsersRouters");
+
+connectDB();
 
 // CREATING LOGIN USERS DATA
 app.post("/login", async (req, res) => {
@@ -23,7 +24,6 @@ app.get("/getLoginUsers", (req, res) => {
     .then((users) => res.json(users))
     .catch((err) => res.json(err));
 });
-
 
 app.listen(5000, (req, res) => {
   console.log("server is running");
